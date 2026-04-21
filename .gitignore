@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual env / local env
+.env
+.venv/
+venv/
+env/
+.python-version
+
+# IDE
+.idea/
+.vscode/
+
+# OS / misc
+Thumbs.db
+.DS_Store
+
+# Build / logs
+*.log
+
+# Local outputs
+outputs/
+data/outputs/**
+
+# Sensitive or copyrighted data
+data/raw/**
+data/interim/**
+data/processed/cleaned*.csv
+data/processed/cleaned*.parquet
+data/processed/scored*.csv
+data/processed/scored*.parquet
+data/processed/labeled*.csv
+data/processed/labeled*.parquet
+data/processed/unified.csv
+data/processed/*llm*.jsonl
+data/processed/*llm*.csv
+data/processed/content_feedback_report.csv
+data/processed/comment_reaction_summary.csv
+data/processed/platform_summary.csv
+data/processed/business_modes.csv
+data/processed/feedback_mode_multilabel.csv
+data/processed/keywords.csv
+data/processed/metrics.csv
+data/processed/value_levels.csv
+
+# Keep only safe demo artifacts when explicitly added later
+!data/samples/
+!data/samples/**

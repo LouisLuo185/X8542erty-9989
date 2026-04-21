@@ -1,0 +1,2 @@
+﻿platform,total_contents,high_value_contents,llm_routed_contents,total_comments,high_value_comments,llm_routed_comments,summary
+zhihu,121,93,93,3539,825,685,zhihu 当前演示数据中，高价值样本占比约 76.86%，进入 LLM 的样本占比约 76.86%，高上下文依赖样本占比约 4.61%。

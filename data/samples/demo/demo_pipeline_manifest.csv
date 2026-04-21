@@ -1,0 +1,15 @@
+﻿stage,rows,seconds
+aggregate,3539.0,1.5353
+clean_features,3539.0,2.1533
+content_base,126.0,0.0299
+content_clean_features,121.0,1.8879
+content_llm_merge,121.0,0.2974
+content_route,121.0,0.1022
+content_score_label,121.0,0.1174
+funnel,,
+ingest,3794.0,0.3892
+llm_merge,3539.0,2.0609
+publish_demo,121.0,0.6602
+route,3539.0,0.8809
+score_label,3539.0,0.9254
+threads,4241.0,0.8379
