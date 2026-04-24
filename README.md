@@ -550,3 +550,15 @@ streamlit run app.py
 ## 声明
 
 本项目仅用于学习、研究和作品集展示。使用社区数据时，请遵守目标平台的服务条款、robots 规则与相关法律要求。若将数据进一步用于商业模型训练、公开分发或生产环境，请额外评估版权、平台条款和隐私风险。
+
+## **本地运行截图**
+
+![image-20260421022100130](C:\Users\Louis\AppData\Roaming\Typora\typora-user-images\image-20260421022100130.png)
+
+![image-20260421022120847](C:\Users\Louis\AppData\Roaming\Typora\typora-user-images\image-20260421022120847.png)
+
+![image-20260421022207064](C:\Users\Louis\AppData\Roaming\Typora\typora-user-images\image-20260421022207064.png)
+
+![image-20260421022229413](C:\Users\Louis\AppData\Roaming\Typora\typora-user-images\image-20260421022229413.png)
+
+![image-20260421022252249](C:\Users\Louis\AppData\Roaming\Typora\typora-user-images\image-20260421022252249.png)
