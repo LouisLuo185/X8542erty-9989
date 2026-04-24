@@ -25,6 +25,61 @@ DEMO_MODES_PATH = DATA_DEMO_DIR / "demo_business_modes.csv"
 DEMO_MULTILABEL_PATH = DATA_DEMO_DIR / "demo_feedback_multilabel.csv"
 DEMO_MANIFEST_PATH = DATA_DEMO_DIR / "demo_pipeline_manifest.csv"
 
+UI_LANG = "zh"
+
+TEXTS = {
+    "title": {
+        "zh": "中文长文本语料筛选与 LLM 弱监督标注控制台",
+        "en": "Chinese Long-Text Filtering and LLM Weak-Supervision Dashboard",
+    },
+    "caption": {
+        "zh": "展示从原始社区文本到训练候选样本、Hard Sample 路由和结构化弱监督标签的完整 pipeline。",
+        "en": "Shows the full pipeline from raw community text to training candidates, hard-sample routing, and structured weak-supervision labels.",
+    },
+    "demo_notice": {
+        "zh": "线上演示因版权与公开展示限制，不展示完整原始社区文本、用户标识或可回溯链接；当前页面使用脱敏与改写后的 demo 数据。",
+        "en": "Due to copyright and public-display restrictions, the online demo does not expose full original community text, user identifiers, or traceable links; the current page uses sanitized and rewritten demo data.",
+    },
+    "missing_warning": {
+        "zh": "尚未发现处理结果，请先运行 python -m src.pipeline.run_pipeline --stage pre_llm 或 full。",
+        "en": "No processed results were found. Please run python -m src.pipeline.run_pipeline --stage pre_llm or full first.",
+    },
+    "tab_overview": {"zh": "概览", "en": "Overview"},
+    "tab_training": {"zh": "训练数据视角", "en": "Training View"},
+    "tab_funnel": {"zh": "管线漏斗", "en": "Pipeline Funnel"},
+    "tab_content": {"zh": "回答视角", "en": "Content View"},
+    "tab_comment": {"zh": "评论视角", "en": "Comment View"},
+    "tab_export": {"zh": "导出", "en": "Export"},
+    "lang_label": {"zh": "语言 / Language", "en": "Language / 语言"},
+    "sub_overview": {"zh": "整体概览", "en": "Overview Metrics"},
+    "metric_content_total": {"zh": "回答总数", "en": "Content Rows"},
+    "metric_content_high": {"zh": "高价值回答", "en": "High-Value Content"},
+    "metric_content_llm": {"zh": "回答 LLM 候选", "en": "Content Routed to LLM"},
+    "metric_comment_total": {"zh": "评论总数", "en": "Comment Rows"},
+    "metric_comment_high": {"zh": "高价值评论", "en": "High-Value Comments"},
+    "sub_training_position": {"zh": "训练数据项目定位", "en": "Training-Data Positioning"},
+    "sub_training_metrics": {"zh": "训练候选指标", "en": "Training-Candidate Metrics"},
+    "sub_training_scatter": {"zh": "训练样本质量分布", "en": "Training Sample Distribution"},
+    "sub_training_route": {"zh": "Hard Sample 路由视角", "en": "Hard-Sample Routing"},
+    "sub_training_examples": {"zh": "训练候选样本示例", "en": "Training Candidate Examples"},
+    "sub_funnel": {"zh": "管线漏斗", "en": "Pipeline Funnel"},
+    "sub_platform_summary": {"zh": "平台摘要", "en": "Platform Summary"},
+    "sub_content_modes": {"zh": "回答视角：业务模式分布", "en": "Content View: Mode Distribution"},
+    "sub_content_scatter": {"zh": "回答视角：信息密度与业务价值", "en": "Content View: Density vs. Value"},
+    "sub_content_top": {"zh": "回答视角：高价值回答 Top 15", "en": "Content View: Top High-Value Samples"},
+    "sub_comment_reaction": {"zh": "回答视角：评论辅助验证", "en": "Content View: Comment Validation"},
+    "sub_comment_modes": {"zh": "评论视角：业务模式分布", "en": "Comment View: Mode Distribution"},
+    "sub_comment_multilabel": {"zh": "评论视角：多标签反馈模式", "en": "Comment View: Multilabel Modes"},
+    "sub_comment_entropy": {"zh": "评论视角：信息密度与业务价值", "en": "Comment View: Density vs. Value"},
+    "sub_comment_route": {"zh": "评论视角：LLM 路由", "en": "Comment View: LLM Routing"},
+    "sub_comment_examples": {"zh": "评论视角：样本", "en": "Comment View: Sample Cases"},
+    "sub_export": {"zh": "导出", "en": "Export"},
+}
+
+
+def tr(key: str) -> str:
+    return TEXTS.get(key, {}).get(UI_LANG, key)
+
 STAGE_LABELS = {
     "ingest": "原始数据接入",
     "threads": "评论线程构建",
@@ -43,6 +98,24 @@ STAGE_LABELS = {
     "needs_llm_analysis": "进入 LLM 候选池",
     "annotation_llm": "已完成 LLM 标注",
 }
+STAGE_LABELS_EN = {
+    "ingest": "Raw Ingestion",
+    "threads": "Thread Construction",
+    "content_base": "Content Base Table",
+    "clean_features": "Comment Cleaning",
+    "content_clean_features": "Content Cleaning",
+    "score_label": "Comment Rule Scoring",
+    "content_score_label": "Content Rule Scoring",
+    "route": "Comment LLM Routing",
+    "content_route": "Content LLM Routing",
+    "llm_merge": "Comment LLM Merge",
+    "content_llm_merge": "Content LLM Merge",
+    "aggregate": "Aggregation",
+    "funnel": "Overall Funnel",
+    "labeled_final": "Final Comment Table",
+    "needs_llm_analysis": "LLM Candidate Pool",
+    "annotation_llm": "LLM Annotation Done",
+}
 
 BUSINESS_MODE_LABELS = {
     "product_experience": "产品体验",
@@ -53,6 +126,15 @@ BUSINESS_MODE_LABELS = {
     "plot_discussion": "剧情内容",
     "other_high_value": "其他高价值",
 }
+BUSINESS_MODE_LABELS_EN = {
+    "product_experience": "Product Experience",
+    "monetization": "Monetization",
+    "brand_communication": "Brand Communication",
+    "community_conflict": "Community Conflict",
+    "competition": "Competition",
+    "plot_discussion": "Narrative / Plot",
+    "other_high_value": "Other High Value",
+}
 
 COMMENT_TARGET_LABELS = {
     "game": "游戏本体",
@@ -61,6 +143,13 @@ COMMENT_TARGET_LABELS = {
     "mixed": "混合对象",
     "unclear": "不明确",
 }
+COMMENT_TARGET_LABELS_EN = {
+    "game": "Game",
+    "answer": "Answer",
+    "community": "Community",
+    "mixed": "Mixed Target",
+    "unclear": "Unclear",
+}
 
 SENTIMENT_LABELS = {
     "positive": "正向",
@@ -68,12 +157,23 @@ SENTIMENT_LABELS = {
     "negative": "负向",
     "mixed": "复杂/混合",
 }
+SENTIMENT_LABELS_EN = {
+    "positive": "Positive",
+    "neutral": "Neutral",
+    "negative": "Negative",
+    "mixed": "Mixed",
+}
 
 PLATFORM_LABELS = {"zhihu": "知乎"}
+PLATFORM_LABELS_EN = {"zhihu": "Zhihu"}
 
 ANNOTATION_SOURCE_LABELS = {
     "llm": "LLM 标注",
     "rule": "规则标注",
+}
+ANNOTATION_SOURCE_LABELS_EN = {
+    "llm": "LLM",
+    "rule": "Rule",
 }
 
 ROUTE_REASON_LABELS = {
@@ -85,6 +185,44 @@ ROUTE_REASON_LABELS = {
     "clear_target": "对象明确",
     "competition_mode": "竞品比较",
     "sarcasm_with_signal": "反讽但有业务信号",
+}
+ROUTE_REASON_LABELS_EN = {
+    "actionable_feedback": "Actionable Feedback",
+    "long_comment": "Long Text",
+    "context_heavy": "Context Heavy",
+    "high_entropy": "High Information Density",
+    "actionable_pattern": "Actionable Pattern",
+    "clear_target": "Clear Target",
+    "competition_mode": "Competition",
+    "sarcasm_with_signal": "Sarcasm with Signal",
+}
+
+TRAINING_LABELS = {
+    "keep_for_training": "保留为训练候选",
+    "drop_as_noise": "噪声样本丢弃",
+    "needs_context": "需要上下文补全",
+    "hard_sample_for_llm": "LLM 难样本",
+    "review_required": "需要人工复核",
+}
+TRAINING_LABELS_EN = {
+    "keep_for_training": "Keep for Training",
+    "drop_as_noise": "Drop as Noise",
+    "needs_context": "Needs Context",
+    "hard_sample_for_llm": "Hard Sample for LLM",
+    "review_required": "Review Required",
+}
+
+MODEL_TARGET_LABELS = {
+    "quality_filter_model": "质量过滤模型",
+    "sample_router_model": "样本路由模型",
+    "context_dependency_model": "上下文依赖检测模型",
+    "weak_label_classifier": "弱监督标签分类器",
+}
+MODEL_TARGET_LABELS_EN = {
+    "quality_filter_model": "Quality Filter Model",
+    "sample_router_model": "Sample Router Model",
+    "context_dependency_model": "Context Dependency Model",
+    "weak_label_classifier": "Weak Label Classifier",
 }
 
 COLUMN_LABELS = {
@@ -122,6 +260,50 @@ COLUMN_LABELS = {
     "high_value_comment_count": "高价值评论数",
     "avg_comment_business_value_score": "评论平均业务价值分",
     "avg_comment_entropy_score": "评论平均信息密度分",
+    "training_data_label": "训练数据标签",
+    "training_data_reason": "训练标签原因",
+    "training_sample_score": "训练样本分",
+    "model_target": "适合训练的模型",
+}
+COLUMN_LABELS_EN = {
+    "stage": "Stage",
+    "rows": "Rows",
+    "seconds": "Seconds",
+    "platform": "Platform",
+    "business_mode": "Business Mode",
+    "feedback_mode": "Feedback Mode",
+    "weighted_count": "Weighted Count",
+    "count": "Count",
+    "high_value_count": "High-Value Count",
+    "question_title": "Case Title",
+    "answer_title": "Answer Title",
+    "answer_summary": "Summary",
+    "clean_text": "Text",
+    "feedback_entropy_score": "Information Density Score",
+    "business_value_score": "Value Score",
+    "quality_score": "Quality Score",
+    "context_dependency_score": "Context Dependency Score",
+    "high_value_reason": "Reason",
+    "llm_priority_score": "LLM Priority Score",
+    "llm_route_reason": "LLM Routing Reason",
+    "needs_llm_analysis": "Needs LLM",
+    "sentiment": "Sentiment",
+    "confidence": "Confidence",
+    "summary": "Summary",
+    "comment_count": "Comment Count",
+    "source_comment_count": "Source Comment Count",
+    "reaction_comment_count": "Reaction Comment Count",
+    "supportive_ratio": "Supportive Ratio (%)",
+    "opposing_ratio": "Opposing Ratio (%)",
+    "controversy_score": "Controversy Score (%)",
+    "sarcasm_ratio": "Sarcasm Ratio (%)",
+    "high_value_comment_count": "High-Value Comment Count",
+    "avg_comment_business_value_score": "Avg Comment Value Score",
+    "avg_comment_entropy_score": "Avg Comment Density Score",
+    "training_data_label": "Training Label",
+    "training_data_reason": "Training Label Reason",
+    "training_sample_score": "Training Sample Score",
+    "model_target": "Model Target",
 }
 
 
@@ -166,50 +348,303 @@ def map_pipe_text(series: pd.Series, mapping: dict[str, str]) -> pd.Series:
 
 def localize_common_fields(df: pd.DataFrame) -> pd.DataFrame:
     localized = df.copy()
+    stage_map = STAGE_LABELS_EN if UI_LANG == "en" else STAGE_LABELS
+    business_mode_map = BUSINESS_MODE_LABELS_EN if UI_LANG == "en" else BUSINESS_MODE_LABELS
+    feedback_mode_map = business_mode_map
+    comment_target_map = COMMENT_TARGET_LABELS_EN if UI_LANG == "en" else COMMENT_TARGET_LABELS
+    sentiment_map = SENTIMENT_LABELS_EN if UI_LANG == "en" else SENTIMENT_LABELS
+    platform_map = PLATFORM_LABELS_EN if UI_LANG == "en" else PLATFORM_LABELS
+    annotation_map = ANNOTATION_SOURCE_LABELS_EN if UI_LANG == "en" else ANNOTATION_SOURCE_LABELS
+    route_map = ROUTE_REASON_LABELS_EN if UI_LANG == "en" else ROUTE_REASON_LABELS
+    training_map = TRAINING_LABELS_EN if UI_LANG == "en" else TRAINING_LABELS
+    model_target_map = MODEL_TARGET_LABELS_EN if UI_LANG == "en" else MODEL_TARGET_LABELS
     if "platform" in localized.columns:
-        localized["platform"] = map_series(localized["platform"], PLATFORM_LABELS)
+        localized["platform"] = map_series(localized["platform"], platform_map)
     if "stage" in localized.columns:
-        localized["stage"] = map_series(localized["stage"], STAGE_LABELS)
+        localized["stage"] = map_series(localized["stage"], stage_map)
     if "business_mode" in localized.columns:
-        localized["business_mode"] = map_pipe_text(localized["business_mode"], BUSINESS_MODE_LABELS)
+        localized["business_mode"] = map_pipe_text(localized["business_mode"], business_mode_map)
     if "feedback_mode" in localized.columns:
-        localized["feedback_mode"] = map_series(localized["feedback_mode"], BUSINESS_MODE_LABELS)
+        localized["feedback_mode"] = map_series(localized["feedback_mode"], feedback_mode_map)
     if "comment_target" in localized.columns:
-        localized["comment_target"] = map_series(localized["comment_target"], COMMENT_TARGET_LABELS)
+        localized["comment_target"] = map_series(localized["comment_target"], comment_target_map)
     if "sentiment" in localized.columns:
-        localized["sentiment"] = map_series(localized["sentiment"], SENTIMENT_LABELS)
+        localized["sentiment"] = map_series(localized["sentiment"], sentiment_map)
     if "annotation_source" in localized.columns:
-        localized["annotation_source"] = map_series(localized["annotation_source"], ANNOTATION_SOURCE_LABELS)
+        localized["annotation_source"] = map_series(localized["annotation_source"], annotation_map)
     if "llm_route_reason" in localized.columns:
-        localized["llm_route_reason"] = map_pipe_text(localized["llm_route_reason"], ROUTE_REASON_LABELS)
+        localized["llm_route_reason"] = map_pipe_text(localized["llm_route_reason"], route_map)
+    if "training_data_label" in localized.columns:
+        localized["training_data_label"] = map_series(localized["training_data_label"], training_map)
+    if "model_target" in localized.columns:
+        localized["model_target"] = map_pipe_text(localized["model_target"], model_target_map)
     return localized
 
 
 def rename_columns(df: pd.DataFrame) -> pd.DataFrame:
-    return df.rename(columns={column: COLUMN_LABELS.get(column, column) for column in df.columns})
+    column_map = COLUMN_LABELS_EN if UI_LANG == "en" else COLUMN_LABELS
+    return df.rename(columns={column: column_map.get(column, column) for column in df.columns})
 
 
 def render_overview(content_df: pd.DataFrame, comment_df: pd.DataFrame) -> None:
-    st.subheader("整体概览")
+    st.subheader(tr("sub_overview"))
     cols = st.columns(5)
-    cols[0].metric("回答总数", len(content_df))
+    cols[0].metric(tr("metric_content_total"), len(content_df))
     cols[1].metric(
-        "高价值回答",
+        tr("metric_content_high"),
         int(content_df["is_high_value_feedback_pre_llm"].sum()) if "is_high_value_feedback_pre_llm" in content_df.columns else 0,
     )
     cols[2].metric(
-        "回答 LLM 候选",
+        tr("metric_content_llm"),
         int(content_df["needs_llm_analysis"].sum()) if "needs_llm_analysis" in content_df.columns else 0,
     )
-    cols[3].metric("评论总数", len(comment_df))
+    cols[3].metric(tr("metric_comment_total"), len(comment_df))
     cols[4].metric(
-        "高价值评论",
+        tr("metric_comment_high"),
         int(comment_df["is_high_value_feedback"].sum()) if "is_high_value_feedback" in comment_df.columns else 0,
     )
 
 
+def render_training_positioning() -> None:
+    st.subheader(tr("sub_training_position"))
+    if UI_LANG == "en":
+        st.markdown(
+            """
+            This demo is framed not only as community analytics, but also as a
+            **Chinese long-text corpus cleaning, training-candidate filtering, hard-sample routing, and weak-supervision pipeline**.
+
+            In this view:
+
+            - `quality_score` measures structural quality
+            - `context_dependency_score` measures context-loss risk
+            - `business_value_score` can be interpreted as training-signal strength
+            - `feedback_entropy_score` measures information density
+            - `needs_llm_analysis` marks hard samples that should be sent to a stronger model
+            """
+        )
+    else:
+        st.markdown(
+            """
+            这个 demo 在展示层上不再只强调“社区反馈分析”，而是把整条链路解释为一条
+            **中文长文本语料清洗、训练候选样本筛选、难样本路由与弱监督标注 pipeline**。
+
+            在这个视角下：
+
+            - `quality_score` 代表文本表达质量与结构完整度
+            - `context_dependency_score` 代表样本脱离上下文后的失真风险
+            - `business_value_score` 在训练视角中可理解为训练信号强度或样本效用
+            - `feedback_entropy_score` 代表样本的信息密度与优先级
+            - `needs_llm_analysis` 代表需要送入更强模型处理的 hard samples
+            """
+        )
+
+
+def render_training_metrics(content_df: pd.DataFrame, comment_df: pd.DataFrame) -> None:
+    st.subheader(tr("sub_training_metrics"))
+    content_candidates = (
+        int(content_df["is_high_value_feedback_pre_llm"].sum())
+        if "is_high_value_feedback_pre_llm" in content_df.columns
+        else 0
+    )
+    comment_candidates = (
+        int(comment_df["is_high_value_feedback"].sum())
+        if "is_high_value_feedback" in comment_df.columns
+        else 0
+    )
+    hard_samples = (
+        int(content_df["needs_llm_analysis"].sum()) if "needs_llm_analysis" in content_df.columns else 0
+    ) + (int(comment_df["needs_llm_analysis"].sum()) if "needs_llm_analysis" in comment_df.columns else 0)
+    context_risky = (
+        int((content_df["context_dependency_score"] >= 3).sum()) if "context_dependency_score" in content_df.columns else 0
+    ) + (int((comment_df["context_dependency_score"] >= 3).sum()) if "context_dependency_score" in comment_df.columns else 0)
+    llm_labeled = (
+        int((content_df.get("annotation_source", pd.Series(dtype=str)) == "llm").sum())
+        + int((comment_df.get("annotation_source", pd.Series(dtype=str)) == "llm").sum())
+    )
+
+    cols = st.columns(5)
+    cols[0].metric("回答训练候选", content_candidates)
+    cols[1].metric("评论训练候选", comment_candidates)
+    cols[2].metric("Hard Samples", hard_samples)
+    cols[3].metric("上下文风险样本", context_risky)
+    cols[4].metric("LLM 弱监督标注样本", llm_labeled)
+
+    summary_rows = [
+        {"样本池": "回答主文本", "总量": len(content_df), "训练候选": content_candidates},
+        {"样本池": "评论与回复", "总量": len(comment_df), "训练候选": comment_candidates},
+    ]
+    summary_df = pd.DataFrame(summary_rows)
+    fig = px.bar(summary_df, x="样本池", y=["总量", "训练候选"], barmode="group", title="样本池与训练候选规模")
+    st.plotly_chart(fig, use_container_width=True)
+
+    label_frames = []
+    for pool_name, df in [("回答主文本", content_df), ("评论与回复", comment_df)]:
+        if not df.empty and "training_data_label" in df.columns:
+            label_df = df.groupby("training_data_label").size().reset_index(name="数量")
+            label_df["样本池"] = pool_name
+            label_frames.append(label_df)
+    if label_frames:
+        label_summary = pd.concat(label_frames, ignore_index=True)
+        label_summary["训练数据标签"] = map_series(label_summary["training_data_label"], TRAINING_LABELS)
+        fig2 = px.bar(
+            label_summary,
+            x="训练数据标签",
+            y="数量",
+            color="样本池",
+            barmode="group",
+            title="训练侧标签分布：保留、丢弃、补上下文、难样本与复核",
+        )
+        st.plotly_chart(fig2, use_container_width=True)
+
+    target_frames = []
+    for pool_name, df in [("回答主文本", content_df), ("评论与回复", comment_df)]:
+        if not df.empty and "model_target" in df.columns:
+            rows = []
+            for cell in df["model_target"].fillna(""):
+                for target in [part for part in str(cell).split("|") if part]:
+                    rows.append({"model_target": target, "样本池": pool_name})
+            if rows:
+                target_frames.append(pd.DataFrame(rows))
+    if target_frames:
+        target_df = pd.concat(target_frames, ignore_index=True)
+        target_summary = target_df.groupby(["样本池", "model_target"]).size().reset_index(name="数量")
+        target_summary["适合训练的模型"] = map_series(target_summary["model_target"], MODEL_TARGET_LABELS)
+        fig3 = px.bar(
+            target_summary,
+            x="适合训练的模型",
+            y="数量",
+            color="样本池",
+            barmode="group",
+            title="样本可支持的模型目标",
+        )
+        st.plotly_chart(fig3, use_container_width=True)
+
+
+def render_training_scatter(content_df: pd.DataFrame, comment_df: pd.DataFrame) -> None:
+    st.subheader(tr("sub_training_scatter"))
+    frames = []
+    if not content_df.empty:
+        temp = content_df.copy()
+        temp["sample_pool"] = "回答主文本"
+        temp["candidate_flag"] = temp.get("is_high_value_feedback_pre_llm", False)
+        frames.append(temp)
+    if not comment_df.empty:
+        temp = comment_df.copy()
+        temp["sample_pool"] = "评论与回复"
+        temp["candidate_flag"] = temp.get("is_high_value_feedback", False)
+        frames.append(temp)
+    if not frames:
+        st.info("暂无可展示的训练样本分布。")
+        return
+    sample_df = pd.concat(frames, ignore_index=True)
+    sort_col = "training_sample_score" if "training_sample_score" in sample_df.columns else "feedback_entropy_score"
+    sample_df = sample_df.sort_values(sort_col, ascending=False).head(500)
+    hover_cols = [col for col in ["question_title", "answer_summary", "clean_text", "high_value_reason"] if col in sample_df.columns]
+    fig = px.scatter(
+        sample_df,
+        x="quality_score",
+        y=sort_col,
+        color="candidate_flag",
+        symbol="sample_pool",
+        hover_data=hover_cols,
+        title="质量分与训练样本分布：候选样本更集中在右上区域",
+    )
+    fig.update_xaxes(title="质量分")
+    fig.update_yaxes(title="训练样本分" if sort_col == "training_sample_score" else "信息密度分")
+    st.plotly_chart(fig, use_container_width=True)
+
+
+def render_training_routing(content_df: pd.DataFrame, comment_df: pd.DataFrame) -> None:
+    st.subheader(tr("sub_training_route"))
+    rows = []
+    for pool_name, df, candidate_col in [
+        ("回答主文本", content_df, "is_high_value_feedback_pre_llm"),
+        ("评论与回复", comment_df, "is_high_value_feedback"),
+    ]:
+        if df.empty:
+            continue
+        rows.append(
+            {
+                "样本池": pool_name,
+                "训练候选": int(df[candidate_col].sum()) if candidate_col in df.columns else 0,
+                "进入 LLM": int(df["needs_llm_analysis"].sum()) if "needs_llm_analysis" in df.columns else 0,
+                "高上下文风险": int((df["context_dependency_score"] >= 3).sum())
+                if "context_dependency_score" in df.columns
+                else 0,
+            }
+        )
+    routing_df = pd.DataFrame(rows)
+    if routing_df.empty:
+        st.info("暂无可展示的路由结果。")
+        return
+    fig = px.bar(
+        routing_df.melt(id_vars="样本池", var_name="阶段", value_name="数量"),
+        x="样本池",
+        y="数量",
+        color="阶段",
+        barmode="group",
+        title="训练候选、Hard Sample 与上下文风险样本分布",
+    )
+    st.plotly_chart(fig, use_container_width=True)
+
+
+def render_training_examples(content_report_df: pd.DataFrame, comment_df: pd.DataFrame) -> None:
+    st.subheader(tr("sub_training_examples"))
+    content_source = content_report_df.copy() if not content_report_df.empty else pd.DataFrame()
+    if not content_source.empty and "is_high_value_feedback_pre_llm" in content_source.columns:
+        top_content = content_source[content_source["is_high_value_feedback_pre_llm"]].sort_values(
+            ["feedback_entropy_score", "llm_priority_score", "business_value_score"],
+            ascending=[False, False, False],
+        ).head(8)
+        cols = [
+            "question_title",
+            "answer_summary",
+            "high_value_reason",
+            "training_data_label",
+            "training_data_reason",
+            "training_sample_score",
+            "model_target",
+            "quality_score",
+            "context_dependency_score",
+            "feedback_entropy_score",
+            "needs_llm_analysis",
+        ]
+        st.markdown("**回答主文本候选**")
+        st.dataframe(
+            rename_columns(localize_common_fields(top_content[[c for c in cols if c in top_content.columns]])),
+            use_container_width=True,
+            hide_index=True,
+        )
+
+    if not comment_df.empty and "is_high_value_feedback" in comment_df.columns:
+        top_comment = comment_df[comment_df["is_high_value_feedback"]].sort_values(
+            ["feedback_entropy_score", "llm_priority_score", "business_value_score"],
+            ascending=[False, False, False],
+        ).head(8)
+        cols = [
+            "question_title",
+            "clean_text",
+            "high_value_reason",
+            "training_data_label",
+            "training_data_reason",
+            "training_sample_score",
+            "model_target",
+            "comment_target",
+            "quality_score",
+            "context_dependency_score",
+            "feedback_entropy_score",
+            "needs_llm_analysis",
+        ]
+        st.markdown("**评论与回复候选**")
+        st.dataframe(
+            rename_columns(localize_common_fields(top_comment[[c for c in cols if c in top_comment.columns]])),
+            use_container_width=True,
+            hide_index=True,
+        )
+
+
 def render_pipeline_funnel(content_df: pd.DataFrame, comment_df: pd.DataFrame) -> None:
-    st.subheader("管线漏斗")
+    st.subheader(tr("sub_funnel"))
     manifest_df = load_manifests()
     if not manifest_df.empty and "stage" in manifest_df.columns:
         display_df = localize_common_fields(manifest_df[["stage", "rows", "seconds"]])
@@ -232,7 +667,7 @@ def render_pipeline_funnel(content_df: pd.DataFrame, comment_df: pd.DataFrame) -
 
 
 def render_summary(summary_df: pd.DataFrame) -> None:
-    st.subheader("平台摘要")
+    st.subheader(tr("sub_platform_summary"))
     if summary_df.empty:
         return
     display_df = localize_common_fields(summary_df)
@@ -243,7 +678,7 @@ def render_summary(summary_df: pd.DataFrame) -> None:
 
 
 def render_content_modes(content_df: pd.DataFrame) -> None:
-    st.subheader("回答视角：业务模式分布")
+    st.subheader(tr("sub_content_modes"))
     if content_df.empty or "feedback_modes" not in content_df.columns:
         st.info("暂无回答业务模式统计。")
         return
@@ -263,7 +698,7 @@ def render_content_modes(content_df: pd.DataFrame) -> None:
 
 
 def render_content_scatter(content_df: pd.DataFrame) -> None:
-    st.subheader("回答视角：信息密度与业务价值")
+    st.subheader(tr("sub_content_scatter"))
     if content_df.empty:
         return
     sample = content_df.sort_values("feedback_entropy_score", ascending=False).head(300)
@@ -281,7 +716,7 @@ def render_content_scatter(content_df: pd.DataFrame) -> None:
 
 
 def render_top_contents(content_report_df: pd.DataFrame, content_df: pd.DataFrame) -> None:
-    st.subheader("回答视角：高价值回答 Top 15")
+    st.subheader(tr("sub_content_top"))
     source_df = content_report_df if not content_report_df.empty else content_df
     if source_df.empty:
         st.info("暂无回答主视角结果。")
@@ -310,7 +745,7 @@ def render_top_contents(content_report_df: pd.DataFrame, content_df: pd.DataFram
 
 
 def render_comment_reactions(comment_summary_df: pd.DataFrame) -> None:
-    st.subheader("回答视角：评论辅助验证")
+    st.subheader(tr("sub_comment_reaction"))
     if comment_summary_df.empty:
         st.info("暂无评论反应汇总。")
         return
@@ -318,7 +753,7 @@ def render_comment_reactions(comment_summary_df: pd.DataFrame) -> None:
 
 
 def render_comment_modes(mode_df: pd.DataFrame, multilabel_df: pd.DataFrame) -> None:
-    st.subheader("评论视角：业务模式分布")
+    st.subheader(tr("sub_comment_modes"))
     if not mode_df.empty:
         chart_df = localize_common_fields(mode_df.copy())
         order = chart_df.groupby("business_mode")["weighted_count"].sum().sort_values(ascending=False).index.tolist()
@@ -337,7 +772,7 @@ def render_comment_modes(mode_df: pd.DataFrame, multilabel_df: pd.DataFrame) -> 
     else:
         st.info("暂无评论业务模式统计。")
 
-    st.subheader("评论视角：多标签反馈模式")
+    st.subheader(tr("sub_comment_multilabel"))
     if not multilabel_df.empty:
         chart_df = localize_common_fields(multilabel_df.copy())
         fig = px.bar(
@@ -356,7 +791,7 @@ def render_comment_modes(mode_df: pd.DataFrame, multilabel_df: pd.DataFrame) -> 
 
 
 def render_comment_entropy(comment_df: pd.DataFrame) -> None:
-    st.subheader("评论视角：信息密度与业务价值")
+    st.subheader(tr("sub_comment_entropy"))
     if comment_df.empty:
         return
     sample = comment_df.sort_values("feedback_entropy_score", ascending=False).head(300)
@@ -391,7 +826,7 @@ def render_comment_entropy(comment_df: pd.DataFrame) -> None:
 
 
 def render_comment_route(comment_df: pd.DataFrame) -> None:
-    st.subheader("评论视角：LLM 路由")
+    st.subheader(tr("sub_comment_route"))
     if comment_df.empty:
         return
     reason_keys = sorted({r for cell in comment_df["llm_route_reason"].fillna("") for r in str(cell).split("|") if r})
@@ -422,7 +857,7 @@ def render_comment_route(comment_df: pd.DataFrame) -> None:
 
 
 def render_comment_examples(comment_df: pd.DataFrame) -> None:
-    st.subheader("评论视角：样本")
+    st.subheader(tr("sub_comment_examples"))
     if comment_df.empty:
         return
 
@@ -441,7 +876,7 @@ def render_comment_examples(comment_df: pd.DataFrame) -> None:
 
 
 def render_export(content_report_df: pd.DataFrame, content_df: pd.DataFrame, comment_df: pd.DataFrame) -> None:
-    st.subheader("导出")
+    st.subheader(tr("sub_export"))
     export_view = st.radio("导出视角", ["回答视角", "评论视角"], horizontal=True)
     if export_view == "回答视角":
         subset = content_report_df.copy() if not content_report_df.empty else content_df.copy()
@@ -473,9 +908,11 @@ def render_export(content_report_df: pd.DataFrame, content_df: pd.DataFrame, com
 
 
 def main() -> None:
-    st.set_page_config(page_title="回答与评论双视角控制台", layout="wide")
-    st.title("知乎《原神》回答与评论双视角反馈控制台")
-    st.caption("回答视角负责识别主观点与高价值内容；评论视角负责验证社区反应、争议与噪声。")
+    global UI_LANG
+    st.set_page_config(page_title="Bilingual Demo", layout="wide")
+    UI_LANG = "en" if st.sidebar.radio(tr("lang_label"), ["中文", "English"], index=0) == "English" else "zh"
+    st.title(tr("title"))
+    st.caption(tr("caption"))
 
     comment_path, comment_demo_mode = resolve_path(LABELED_COMMENT_PATH, DEMO_COMMENT_PATH)
     content_report_path, content_report_demo_mode = resolve_path(CONTENT_REPORT_PATH, DEMO_CONTENT_REPORT_PATH)
@@ -500,7 +937,7 @@ def main() -> None:
     )
 
     if demo_mode:
-        st.info("当前为公开演示数据模式：页面使用脱敏与改写后的 demo 数据，不包含平台原始文本。")
+        st.info(tr("demo_notice"))
 
     comment_df = load_dataframe(comment_path)
     content_report_df = load_dataframe(content_report_path)
@@ -513,31 +950,47 @@ def main() -> None:
     multilabel_df = load_dataframe(multilabel_path)
 
     if comment_df.empty and content_df.empty:
-        st.warning("尚未发现处理结果，请先运行 python -m src.pipeline.run_pipeline --stage pre_llm 或 full。")
+        st.warning(tr("missing_warning"))
         return
 
-    tabs = st.tabs(["概览", "管线漏斗", "回答视角", "评论视角", "导出"])
+    tabs = st.tabs(
+        [
+            tr("tab_overview"),
+            tr("tab_training"),
+            tr("tab_funnel"),
+            tr("tab_content"),
+            tr("tab_comment"),
+            tr("tab_export"),
+        ]
+    )
 
     with tabs[0]:
         render_overview(content_df, comment_df)
         render_summary(summary_df)
 
     with tabs[1]:
-        render_pipeline_funnel(content_df, comment_df)
+        render_training_positioning()
+        render_training_metrics(content_df, comment_df)
+        render_training_scatter(content_df, comment_df)
+        render_training_routing(content_df, comment_df)
+        render_training_examples(content_report_df, comment_df)
 
     with tabs[2]:
+        render_pipeline_funnel(content_df, comment_df)
+
+    with tabs[3]:
         render_content_modes(content_df)
         render_content_scatter(content_df)
         render_top_contents(content_report_df, content_df)
         render_comment_reactions(comment_summary_df)
 
-    with tabs[3]:
+    with tabs[4]:
         render_comment_modes(mode_df, multilabel_df)
         render_comment_entropy(comment_df)
         render_comment_route(comment_df)
         render_comment_examples(comment_df)
 
-    with tabs[4]:
+    with tabs[5]:
         render_export(content_report_df, content_df, comment_df)
 
 
